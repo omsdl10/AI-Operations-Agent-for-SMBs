@@ -2,7 +2,7 @@
 
 Production-ready SaaS foundation for automating customer communication, lead management, follow-ups, payment reminders, appointment scheduling, and daily summaries with AI agents.
 
-This repository is being built in staged milestones. The current implementation covers **Stage 3: Authentication**.
+This repository is being built in staged milestones. The current implementation covers **Stage 4: Database Models**.
 
 ## Monorepo Structure
 
@@ -41,8 +41,8 @@ Services:
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:8000
 - API docs: http://localhost:8000/docs
-- PostgreSQL: localhost:5432
-- Redis: localhost:6379
+- PostgreSQL: localhost:5433
+- Redis: localhost:6380
 
 ## Run Locally
 
@@ -53,6 +53,7 @@ cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
@@ -77,6 +78,26 @@ curl http://localhost:8000/api/v1/health
 - `POST /api/v1/auth/refresh`
 - `POST /api/v1/auth/logout`
 - `GET /api/v1/auth/me`
+
+## Seed Data
+
+After migrations are applied, load sample business data:
+
+```bash
+cd backend
+python scripts/seed.py
+```
+
+With Docker:
+
+```bash
+docker compose exec backend python scripts/seed.py
+```
+
+Sample login after seeding:
+
+- Email: `owner@example.com`
+- Password: `password123`
 
 ## Git Setup
 
