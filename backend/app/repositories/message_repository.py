@@ -15,6 +15,9 @@ class MessageRepository:
         self.db.refresh(message)
         return message
 
+    def get_by_id(self, message_id: str) -> Message | None:
+        return self.db.scalar(select(Message).where(Message.id == message_id))
+
     def list_for_customer(self, business_id: str, customer_id: str, limit: int = 100) -> list[Message]:
         statement = (
             select(Message)
@@ -62,4 +65,3 @@ class MessageRepository:
             )
         )
         return self.db.scalar(statement) or 0
-

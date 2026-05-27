@@ -1,8 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react';
 
+import { runMessageAgent } from '../api/agents';
 import { fetchConversationMessages, fetchConversations, sendMessage } from '../api/messages';
 import { PageHeader } from '../components/ui/PageHeader';
 import { StatusBadge } from '../components/ui/StatusBadge';
+import type { MessageAgentResult } from '../types/agent';
 import type { Conversation, Message } from '../types/message';
 
 export function MessagesPage() {
@@ -10,8 +12,10 @@ export function MessagesPage() {
   const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [reply, setReply] = useState('');
+  const [agentResult, setAgentResult] = useState<MessageAgentResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
+  const [runningAgent, setRunningAgent] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const loadConversations = async () => {
@@ -38,7 +42,10 @@ export function MessagesPage() {
     if (!selectedConversation) return;
 
     fetchConversationMessages(selectedConversation.customer_id)
-      .then(setMessages)
+      .then((data) => {
+        setMessages(data);
+        setAgentResult(null);
+      })
       .catch(() => setError('Unable to load conversation history.'));
   }, [selectedConversation]);
 
@@ -57,6 +64,31 @@ export function MessagesPage() {
       setError('Unable to send WhatsApp reply.');
     } finally {
       setSending(false);
+    }
+  };
+
+  const handleRunAgent = async () => {
+    const latestInbound = [...messages].reverse().find((message) => message.direction === 'inbound');
+    if (!latestInbound) {
+      setError('No inbound message is available for the AI agent.');
+      return;
+    }
+
+    setRunningAgent(true);
+    setError(null);
+    try {
+      const result = await runMessageAgent(latestInbound.id);
+      setAgentResult(result);
+      if (result.suggested_reply && !result.sent_message_id) {
+        setReply(result.suggested_reply);
+      }
+      if (selectedConversation) {
+        setMessages(await fetchConversationMessages(selectedConversation.customer_id));
+      }
+    } catch {
+      setError('Unable to run the AI message agent.');
+    } finally {
+      setRunningAgent(false);
     }
   };
 
@@ -105,8 +137,29 @@ export function MessagesPage() {
           {selectedConversation ? (
             <>
               <div className="border-b border-slate-200 p-5">
-                <p className="font-semibold text-slate-950">{selectedConversation.customer_name}</p>
-                <p className="text-sm text-slate-500">WhatsApp · {selectedConversation.phone}</p>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="font-semibold text-slate-950">{selectedConversation.customer_name}</p>
+                    <p className="text-sm text-slate-500">WhatsApp · {selectedConversation.phone}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleRunAgent}
+                    disabled={runningAgent}
+                    className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 disabled:opacity-50"
+                  >
+                    {runningAgent ? 'Running AI...' : 'Run AI agent'}
+                  </button>
+                </div>
+                {agentResult && (
+                  <div className="mt-4 rounded-md border border-cyan-200 bg-cyan-50 p-3 text-sm text-cyan-900">
+                    <p className="font-semibold">
+                      {agentResult.intent ?? 'unknown'} · confidence{' '}
+                      {Math.round((agentResult.confidence_score ?? 0) * 100)}%
+                    </p>
+                    <p className="mt-1">{agentResult.ai_reasoning}</p>
+                  </div>
+                )}
               </div>
               <div className="flex-1 space-y-4 overflow-y-auto p-5">
                 {messages.map((message) => (
@@ -154,4 +207,3 @@ export function MessagesPage() {
     </section>
   );
 }
-

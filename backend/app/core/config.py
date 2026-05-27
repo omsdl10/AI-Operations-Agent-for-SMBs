@@ -21,6 +21,10 @@ class Settings(BaseSettings):
     twilio_whatsapp_from: str = ""
     twilio_mock_mode: bool = True
     twilio_default_business_id: str = ""
+    openai_api_key: str = ""
+    openai_model: str = "gpt-4o-mini"
+    ai_auto_reply_enabled: bool = True
+    ai_low_confidence_threshold: float = 0.65
 
     @property
     def cors_origin_list(self) -> list[str]:

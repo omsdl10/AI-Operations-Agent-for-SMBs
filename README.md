@@ -2,7 +2,7 @@
 
 Production-ready SaaS foundation for automating customer communication, lead management, follow-ups, payment reminders, appointment scheduling, and daily summaries with AI agents.
 
-This repository is being built in staged milestones. The current implementation covers **Stage 7: Twilio WhatsApp Integration**.
+This repository is being built in staged milestones. The current implementation covers **Stage 8: LangGraph AI Agent**.
 
 ## Monorepo Structure
 
@@ -100,6 +100,10 @@ curl http://localhost:8000/api/v1/health
 - `GET /api/v1/messages/conversations`
 - `GET /api/v1/messages/conversations/{customer_id}`
 - `POST /api/v1/messages/send`
+
+## AI Agent Endpoints
+
+- `POST /api/v1/agents/messages/{message_id}/run`
 
 ## Seed Data
 

@@ -2,8 +2,10 @@ from fastapi import APIRouter, Depends, Form
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_db_session
+from app.core.config import settings
 from app.schemas.base import APIResponse
 from app.schemas.message import MessageRead, TwilioWebhookResponse
+from app.services.agent_service import AgentService
 from app.services.twilio_service import TwilioService
 from app.utils.responses import success_response
 
@@ -22,6 +24,8 @@ async def whatsapp_webhook(
         body=Body,
         external_id=MessageSid,
     )
+    if settings.ai_auto_reply_enabled:
+        AgentService(db).run_message_agent(message.id)
     return success_response(
         data=TwilioWebhookResponse(stored=True, message_id=message.id),
         message="Inbound WhatsApp message stored.",
@@ -52,5 +56,6 @@ async def mock_inbound_message(
         body=body,
         external_id=None,
     )
+    if settings.ai_auto_reply_enabled:
+        AgentService(db).run_message_agent(data.id)
     return success_response(data=data, message="Mock inbound message stored.")
-
