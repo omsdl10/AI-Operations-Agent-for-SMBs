@@ -2,7 +2,7 @@
 
 Production-ready SaaS foundation for automating customer communication, lead management, follow-ups, payment reminders, appointment scheduling, and daily summaries with AI agents.
 
-This repository is being built in staged milestones. The current implementation covers **Stage 2: Backend Foundation**.
+This repository is being built in staged milestones. The current implementation covers **Stage 3: Authentication**.
 
 ## Monorepo Structure
 
@@ -69,6 +69,14 @@ npm run dev
 ```bash
 curl http://localhost:8000/api/v1/health
 ```
+
+## Authentication Endpoints
+
+- `POST /api/v1/auth/signup`
+- `POST /api/v1/auth/login`
+- `POST /api/v1/auth/refresh`
+- `POST /api/v1/auth/logout`
+- `GET /api/v1/auth/me`
 
 ## Git Setup
 

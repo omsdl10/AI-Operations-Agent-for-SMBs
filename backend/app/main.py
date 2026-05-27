@@ -7,6 +7,9 @@ from app.api.v1.api import api_router
 from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import configure_logging, get_logger
+from app.db.base import Base
+from app.db.session import engine
+from app import models  # noqa: F401
 from app.middleware.logging import RequestLoggingMiddleware
 
 logger = get_logger(__name__)
@@ -16,6 +19,7 @@ logger = get_logger(__name__)
 async def lifespan(app: FastAPI):
     configure_logging()
     logger.info("Starting %s", settings.app_name)
+    Base.metadata.create_all(bind=engine)
     yield
     logger.info("Shutting down %s", settings.app_name)
 
