@@ -2,10 +2,16 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { ProtectedRoute } from '../components/auth/ProtectedRoute';
 import { AppLayout } from '../components/layout/AppLayout';
+import { AppointmentsPage } from '../pages/AppointmentsPage';
+import { CustomersPage } from '../pages/CustomersPage';
 import { DashboardPage } from '../pages/DashboardPage';
 import { HealthPage } from '../pages/HealthPage';
+import { InvoicesPage } from '../pages/InvoicesPage';
+import { LeadsPage } from '../pages/LeadsPage';
 import { LoginPage } from '../pages/LoginPage';
+import { MessagesPage } from '../pages/MessagesPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { SettingsPage } from '../pages/SettingsPage';
 import { SignupPage } from '../pages/SignupPage';
 
 export const router = createBrowserRouter([
@@ -27,6 +33,30 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <DashboardPage />,
+          },
+          {
+            path: 'customers',
+            element: <CustomersPage />,
+          },
+          {
+            path: 'leads',
+            element: <LeadsPage />,
+          },
+          {
+            path: 'messages',
+            element: <MessagesPage />,
+          },
+          {
+            path: 'invoices',
+            element: <InvoicesPage />,
+          },
+          {
+            path: 'appointments',
+            element: <AppointmentsPage />,
+          },
+          {
+            path: 'settings',
+            element: <SettingsPage />,
           },
           {
             path: 'health',

@@ -2,7 +2,7 @@
 
 Production-ready SaaS foundation for automating customer communication, lead management, follow-ups, payment reminders, appointment scheduling, and daily summaries with AI agents.
 
-This repository is being built in staged milestones. The current implementation covers **Stage 4: Database Models**.
+This repository is being built in staged milestones. The current implementation covers **Stage 5: React Dashboard**.
 
 ## Monorepo Structure
 
