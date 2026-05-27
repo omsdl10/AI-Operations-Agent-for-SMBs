@@ -16,6 +16,11 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
     refresh_token_expire_days: int = 7
+    twilio_account_sid: str = ""
+    twilio_auth_token: str = ""
+    twilio_whatsapp_from: str = ""
+    twilio_mock_mode: bool = True
+    twilio_default_business_id: str = ""
 
     @property
     def cors_origin_list(self) -> list[str]:

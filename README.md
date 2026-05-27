@@ -2,7 +2,7 @@
 
 Production-ready SaaS foundation for automating customer communication, lead management, follow-ups, payment reminders, appointment scheduling, and daily summaries with AI agents.
 
-This repository is being built in staged milestones. The current implementation covers **Stage 6: CRM Module**.
+This repository is being built in staged milestones. The current implementation covers **Stage 7: Twilio WhatsApp Integration**.
 
 ## Monorepo Structure
 
@@ -91,6 +91,15 @@ curl http://localhost:8000/api/v1/health
 - `GET /api/v1/leads/{lead_id}`
 - `PUT /api/v1/leads/{lead_id}`
 - `DELETE /api/v1/leads/{lead_id}`
+
+## Messaging Endpoints
+
+- `POST /api/v1/twilio/webhook`
+- `POST /api/v1/twilio/status`
+- `POST /api/v1/twilio/mock-inbound`
+- `GET /api/v1/messages/conversations`
+- `GET /api/v1/messages/conversations/{customer_id}`
+- `POST /api/v1/messages/send`
 
 ## Seed Data
 
