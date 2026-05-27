@@ -13,3 +13,4 @@ twilio==9.4.3
 python-multipart==0.0.20
 langgraph==0.2.60
 langchain-openai==0.2.14
+apscheduler==3.10.4

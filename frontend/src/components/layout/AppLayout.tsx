@@ -10,6 +10,7 @@ const navigation = [
   { to: '/messages', label: 'Messages' },
   { to: '/invoices', label: 'Invoices' },
   { to: '/appointments', label: 'Appointments' },
+  { to: '/summaries', label: 'Summaries' },
   { to: '/settings', label: 'Settings' },
   { to: '/health', label: 'System Health' },
 ];

@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     openai_model: str = "gpt-4o-mini"
     ai_auto_reply_enabled: bool = True
     ai_low_confidence_threshold: float = 0.65
+    automation_scheduler_enabled: bool = True
+    automation_interval_minutes: int = 15
 
     @property
     def cors_origin_list(self) -> list[str]:

@@ -15,6 +15,7 @@ import { MessagesPage } from '../pages/MessagesPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { SettingsPage } from '../pages/SettingsPage';
 import { SignupPage } from '../pages/SignupPage';
+import { SummariesPage } from '../pages/SummariesPage';
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
           {
             path: 'settings',
             element: <SettingsPage />,
+          },
+          {
+            path: 'summaries',
+            element: <SummariesPage />,
           },
           {
             path: 'health',

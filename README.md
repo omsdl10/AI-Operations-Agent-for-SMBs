@@ -2,7 +2,7 @@
 
 Production-ready SaaS foundation for automating customer communication, lead management, follow-ups, payment reminders, appointment scheduling, and daily summaries with AI agents.
 
-This repository is being built in staged milestones. The current implementation covers **Stage 8: LangGraph AI Agent**.
+This repository is being built in staged milestones. The current implementation covers **Stage 10: Daily Business Summary Agent**.
 
 ## Monorepo Structure
 
@@ -104,6 +104,21 @@ curl http://localhost:8000/api/v1/health
 ## AI Agent Endpoints
 
 - `POST /api/v1/agents/messages/{message_id}/run`
+
+## Automation Endpoints
+
+- `POST /api/v1/automations/run-due`
+- `GET /api/v1/automations/notifications`
+
+## Summary Endpoints
+
+- `POST /api/v1/summaries/generate`
+- `GET /api/v1/summaries`
+- `GET /api/v1/summaries/{summary_date}`
+
+## Final Stage Status
+
+The 10-stage MVP is now implemented with authentication, CRM, WhatsApp messaging, LangGraph-style AI workflows, automation, and daily summaries.
 
 ## Seed Data
 

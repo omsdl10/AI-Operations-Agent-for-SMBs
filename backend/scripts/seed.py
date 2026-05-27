@@ -130,6 +130,7 @@ def seed() -> None:
             due_at=datetime.utcnow() + timedelta(hours=18),
         )
         db.add(follow_up)
+        db.flush()
 
         summary = DailySummary(
             business_id=business.id,
@@ -182,4 +183,3 @@ def seed() -> None:
 
 if __name__ == "__main__":
     seed()
-
