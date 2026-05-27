@@ -14,10 +14,11 @@ export function HealthPage() {
     apiClient
       .get('/health')
       .then((response) => {
+        const healthData = response.data.data ?? response.data;
         setHealth({
           status: 'success',
-          service: response.data.service,
-          apiStatus: response.data.status,
+          service: healthData.service,
+          apiStatus: healthData.status,
         });
       })
       .catch(() => {
@@ -43,4 +44,3 @@ export function HealthPage() {
     </section>
   );
 }
-

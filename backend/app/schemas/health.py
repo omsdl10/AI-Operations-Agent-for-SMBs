@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class HealthResponse(BaseModel):
+class HealthData(BaseModel):
     status: str
     service: str
-
+    environment: str

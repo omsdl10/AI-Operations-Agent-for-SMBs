@@ -2,7 +2,7 @@
 
 Production-ready SaaS foundation for automating customer communication, lead management, follow-ups, payment reminders, appointment scheduling, and daily summaries with AI agents.
 
-This repository is being built in staged milestones. The current implementation covers **Stage 1: Project Setup**.
+This repository is being built in staged milestones. The current implementation covers **Stage 2: Backend Foundation**.
 
 ## Monorepo Structure
 
@@ -78,4 +78,3 @@ If this folder is not already a Git repository, initialize it before the first c
 git init
 git branch -M main
 ```
-
