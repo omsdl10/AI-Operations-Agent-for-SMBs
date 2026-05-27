@@ -4,10 +4,12 @@ import { ProtectedRoute } from '../components/auth/ProtectedRoute';
 import { AppLayout } from '../components/layout/AppLayout';
 import { AppointmentsPage } from '../pages/AppointmentsPage';
 import { CustomersPage } from '../pages/CustomersPage';
+import { CustomerDetailPage } from '../pages/CustomerDetailPage';
 import { DashboardPage } from '../pages/DashboardPage';
 import { HealthPage } from '../pages/HealthPage';
 import { InvoicesPage } from '../pages/InvoicesPage';
 import { LeadsPage } from '../pages/LeadsPage';
+import { LeadDetailPage } from '../pages/LeadDetailPage';
 import { LoginPage } from '../pages/LoginPage';
 import { MessagesPage } from '../pages/MessagesPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
@@ -39,8 +41,16 @@ export const router = createBrowserRouter([
             element: <CustomersPage />,
           },
           {
+            path: 'customers/:customerId',
+            element: <CustomerDetailPage />,
+          },
+          {
             path: 'leads',
             element: <LeadsPage />,
+          },
+          {
+            path: 'leads/:leadId',
+            element: <LeadDetailPage />,
           },
           {
             path: 'messages',
